@@ -20,7 +20,7 @@ export function DashboardLayoutContent({ children }: { children: React.ReactNode
     <div className="flex min-h-screen bg-gray-50">
       {sidebar}
       <main 
-        className={`flex-1 ml-0 transition-all duration-300 ${isCollapsed ? 'lg:ml-[70px]' : 'lg:ml-[280px]'}`}
+        className={`flex-1 ml-0 transition-all duration-300 ${isCollapsed ? 'lg:ml-[56px]' : 'lg:ml-[192px]'}`}
         onClick={handleMainContentClick}
       >
         {header}
