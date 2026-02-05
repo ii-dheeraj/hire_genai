@@ -41,7 +41,7 @@ export default function PricingPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-500"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-600"></div>
       </div>
     )
   }
@@ -173,11 +173,11 @@ export default function PricingPage() {
             {plans.map((plan, index) => (
               <Card
                 key={index}
-                className={`sr-card relative ${plan.popular ? "ring-2 ring-emerald-500 scale-105" : ""}`}
+                className={`sr-card relative ${plan.popular ? "ring-2 ring-emerald-600 scale-105" : ""}`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <Badge className="bg-emerald-500 text-white px-4 py-1">
+                    <Badge className="bg-emerald-600 text-white px-4 py-1">
                       <Star className="w-3 h-3 mr-1" />
                       Most Popular
                     </Badge>
@@ -203,7 +203,7 @@ export default function PricingPage() {
                   <div className="space-y-3">
                     {plan.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start space-x-3">
-                        <Check className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
                         <span className="text-slate-700 text-sm">{feature}</span>
                       </div>
                     ))}

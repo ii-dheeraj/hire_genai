@@ -135,7 +135,7 @@ export default function HomePage() {
             <div className="md:hidden flex items-center">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-emerald-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500 transition-colors"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-emerald-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-600 transition-colors"
               >
                 {mobileMenuOpen ? (
                   <X className="block h-6 w-6" aria-hidden="true" />
@@ -202,10 +202,10 @@ export default function HomePage() {
       </header>
 
       {/* Announcement Banner */}
-      <div className="bg-emerald-50 border-b border-emerald-100">
+      <div className="bg-emerald-50 border-b border-emerald-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex items-center justify-center">
-            <div className="flex items-center space-x-2 text-emerald-800">
+            <div className="flex items-center space-x-2 text-emerald-700">
               <Zap className="w-4 h-4" />
               <span className="text-sm font-medium">HireGenAI Launches All-New AI-Powered Recruitment Suite</span>
             </div>
@@ -252,7 +252,7 @@ export default function HomePage() {
                   playsInline
                 />
               </div>
-              <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-2xl -z-10"></div>
+              <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl -z-10"></div>
             </div>
           </div>
         </div>
@@ -279,9 +279,9 @@ export default function HomePage() {
           {/* Features Grid - 2x2 Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Intelligent CV Parsing */}
-            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-500/50 hover:shadow-xl hover:-translate-y-2">
+            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-600/50 hover:shadow-xl hover:-translate-y-2">
               <CardContent className="p-0">
-                <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
+                <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
                   <Search className="w-8 h-8 text-emerald-600" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-800 mb-4">Intelligent CV Parsing</h3>
@@ -292,7 +292,7 @@ export default function HomePage() {
             </Card>
 
             {/* AI-Powered Initial Interview */}
-            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-500/50 hover:shadow-xl hover:-translate-y-2">
+            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-600/50 hover:shadow-xl hover:-translate-y-2">
               <CardContent className="p-0">
                 <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
                   <Brain className="w-8 h-8 text-blue-600" />
@@ -305,7 +305,7 @@ export default function HomePage() {
             </Card>
 
             {/* Data-Driven Shortlisting */}
-            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-500/50 hover:shadow-xl hover:-translate-y-2">
+            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-600/50 hover:shadow-xl hover:-translate-y-2">
               <CardContent className="p-0">
                 <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
                   <Phone className="w-8 h-8 text-purple-600" />
@@ -318,7 +318,7 @@ export default function HomePage() {
             </Card>
 
             {/* Advanced Analytics */}
-            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-500/50 hover:shadow-xl hover:-translate-y-2">
+            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-600/50 hover:shadow-xl hover:-translate-y-2">
               <CardContent className="p-0">
                 <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
                   <BarChart3 className="w-8 h-8 text-red-600" />

@@ -98,7 +98,7 @@ export default function ContactPage() {
           {/* Left Side - Info */}
           <div>
             <h1 className="text-4xl lg:text-5xl font-bold text-slate-800 mb-6">
-              Get in <span className="text-emerald-500">Touch</span>
+              Get in <span className="text-emerald-600">Touch</span>
             </h1>
             <p className="text-lg text-slate-600 mb-8">
               Have questions about HireGenAI? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
