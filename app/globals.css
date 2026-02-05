@@ -121,6 +121,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
@@ -158,4 +159,13 @@
 
 .sr-hero-bg {
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+/* Dashboard-specific styles */
+.dashboard-bg {
+  background-color: #f9fafb;
+}
+
+.dashboard-card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300;
 }
