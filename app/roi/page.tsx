@@ -88,7 +88,6 @@ const CURRENCY_CONFIG: Record<string, { code: string; symbol: string; rate: numb
 export default function ROIPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [showLoginModal, setShowLoginModal] = useState(false)
   
   // Currency state
   const [userCountry, setUserCountry] = useState<string>('US')

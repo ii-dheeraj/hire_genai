@@ -5,7 +5,6 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { LoginModal } from "@/components/auth/login-modal"
 import Link from "next/link"
 import {
   Zap,
@@ -37,7 +36,6 @@ export default function HomePage() {
   const { user, loading } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [showLoginModal, setShowLoginModal] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -119,13 +117,14 @@ export default function HomePage() {
               </nav>
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <Button
-                variant="ghost"
-                onClick={() => setShowLoginModal(true)}
-                className="text-gray-700 hover:text-emerald-600 font-medium"
-              >
-                Login
-              </Button>
+              <Link href="/login">
+                <Button
+                  variant="ghost"
+                  className="text-gray-700 hover:text-emerald-600 font-medium"
+                >
+                  Login
+                </Button>
+              </Link>
               <Link href="/signup">
                 <Button className="sr-button-primary">Get started</Button>
               </Link>
@@ -181,16 +180,14 @@ export default function HomePage() {
               </Link>
               <div className="pt-4 pb-3 border-t border-gray-100">
                 <div className="px-3 space-y-2">
-                  <Button
-                    variant="ghost"
-                    onClick={() => {
-                      setShowLoginModal(true)
-                      setMobileMenuOpen(false)
-                    }}
-                    className="w-full justify-start text-gray-700 hover:text-emerald-600 hover:bg-gray-50 font-medium transition-colors"
-                  >
-                    Login
-                  </Button>
+                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start text-gray-700 hover:text-emerald-600 hover:bg-gray-50 font-medium transition-colors"
+                    >
+                      Login
+                    </Button>
+                  </Link>
                   <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
                     <Button className="w-full sr-button-primary">Get started</Button>
                   </Link>
@@ -951,9 +948,6 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
-
-      {/* Modals */}
-      <LoginModal open={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </div>
   )
 }

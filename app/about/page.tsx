@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { Button } from "@/components/ui/button"
-import { LoginModal } from "@/components/auth/login-modal"
 import Link from "next/link"
 import {
   Facebook,
@@ -25,8 +24,6 @@ export default function AboutPage() {
   const { user, loading } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [showLoginModal, setShowLoginModal] = useState(false)
-  const [loginModalTab, setLoginModalTab] = useState<"demo" | "signin">("signin")
 
   useEffect(() => {
     const scrollTo = searchParams?.get('scroll')
@@ -148,15 +145,13 @@ export default function AboutPage() {
                     Book a Meeting
                   </Button>
                 </Link>
-                <Button 
-                  onClick={() => {
-                    setLoginModalTab("demo")
-                    setShowLoginModal(true)
-                  }}
-                  className="bg-white text-emerald-600 hover:bg-emerald-50 font-semibold px-7 py-2.5 h-auto rounded-lg transition-all duration-200 hover:shadow-lg"
-                >
-                  Demo Sign In
-                </Button>
+                <Link href="/login">
+                  <Button 
+                    className="bg-white text-emerald-600 hover:bg-emerald-50 font-semibold px-7 py-2.5 h-auto rounded-lg transition-all duration-200 hover:shadow-lg"
+                  >
+                    Demo Sign In
+                  </Button>
+                </Link>
                 <Button 
                   onClick={() => window.location.href = '/pricing'}
                   className="bg-white text-emerald-600 hover:bg-emerald-50 font-semibold px-7 py-2.5 h-auto rounded-lg transition-all duration-200 hover:shadow-lg"
@@ -418,12 +413,6 @@ export default function AboutPage() {
           </div>
         </div>
       </footer>
-
-      <LoginModal 
-        open={showLoginModal} 
-        onClose={() => setShowLoginModal(false)} 
-        defaultTab={loginModalTab}
-      />
 
       </div>
   )
