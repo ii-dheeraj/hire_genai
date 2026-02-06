@@ -2,8 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useState as useStateNav } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/contexts/auth-context";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/layout/Navbar";
 import Link from "next/link";
@@ -79,10 +77,7 @@ function buildQuestionPlan(jobTitle: string, jobDescription: string, resume: str
 }
 
 export default function DemoEnPage() {
-  const router = useRouter();
-  // ALL hooks must be called at the top before any conditional returns
   const [screen, setScreen] = useState<Screen>("job");
-  const { user, loading } = useAuth();
   
   // Job + candidate state
   const [jobTitle, setJobTitle] = useState("RPA Developer");
@@ -170,12 +165,6 @@ export default function DemoEnPage() {
     return () => window.clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    if (!loading && user) {
-      router.push("/dashboard");
-    }
-  }, [user, loading, router]);
-
   // Control avatar video based on agent speaking state (only after first loop completes)
   useEffect(() => {
     const avatarVideo = avatarVideoRef.current;
@@ -194,19 +183,6 @@ export default function DemoEnPage() {
       avatarVideo.pause();
     }
   }, [agentSpeaking, running]);
-
-  // Early returns after all hooks are called
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-500"></div>
-      </div>
-    );
-  }
-
-  if (user) {
-    return null;
-  }
 
   function resetInterview() {
     setTranscript([]);
@@ -2405,7 +2381,7 @@ export default function DemoEnPage() {
               </button>
               <button 
                 className="btn btn-next" 
-                onClick={() => router.push("/")}
+                onClick={() => window.location.href = "/"}
                 style={{ padding: "12px 24px", borderRadius: 8, background: "#059669", color: "white" }}
               >
                 Back to Home
@@ -2465,26 +2441,14 @@ export default function DemoEnPage() {
                   </Link>
                 </li>
                 <li>
-                  <a 
-                    className="hover:text-emerald-400 transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push('/?scroll=assessment');
-                    }}
-                  >
+                  <Link href="/?scroll=assessment" className="hover:text-emerald-400 transition-colors cursor-pointer">
                     Assessment
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a 
-                    className="hover:text-emerald-400 transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push('/?scroll=faq');
-                    }}
-                  >
+                  <Link href="/?scroll=faq" className="hover:text-emerald-400 transition-colors cursor-pointer">
                     FAQs
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

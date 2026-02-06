@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import Navbar from '@/components/layout/Navbar'
 import { 
@@ -86,7 +86,6 @@ const CURRENCY_CONFIG: Record<string, { code: string; symbol: string; rate: numb
 }
 
 export default function ROIPage() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   
   // Currency state
@@ -946,26 +945,14 @@ export default function ROIPage() {
                   </Link>
                 </li>
                 <li>
-                  <a 
-                    className="hover:text-emerald-400 transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push('/?scroll=assessment');
-                    }}
-                  >
+                  <Link href="/?scroll=assessment" className="hover:text-emerald-400 transition-colors cursor-pointer">
                     Assessment
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a 
-                    className="hover:text-emerald-400 transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push('/?scroll=faq');
-                    }}
-                  >
+                  <Link href="/?scroll=faq" className="hover:text-emerald-400 transition-colors cursor-pointer">
                     FAQs
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

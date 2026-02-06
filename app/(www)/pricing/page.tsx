@@ -1,25 +1,18 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useAuth } from "@/contexts/auth-context"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { getAppUrl } from "@/lib/domain-config"
 import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import Navbar from "@/components/layout/Navbar"
 import Link from "next/link"
 import { Check, X, ArrowRight, Star, Facebook, Instagram, Youtube, Linkedin, Lock } from "lucide-react"
 
 export default function PricingPage() {
-  const { user, loading } = useAuth()
-  const router = useRouter()
   const searchParams = useSearchParams()
-
-  useEffect(() => {
-    if (!loading && user) {
-      router.push("/dashboard")
-    }
-  }, [user, loading, router])
 
   useEffect(() => {
     const scrollTo = searchParams?.get('scroll')
@@ -34,18 +27,6 @@ export default function PricingPage() {
       return () => clearTimeout(timer)
     }
   }, [searchParams])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-600"></div>
-      </div>
-    )
-  }
-
-  if (user) {
-    return null
-  }
 
   const plans = [
     {
@@ -224,7 +205,7 @@ export default function PricingPage() {
                       className={`w-full ${plan.popular ? "sr-button-primary" : "sr-button-secondary"}`}
                       asChild
                     >
-                      <Link href="/signup">
+                      <Link href={getAppUrl('/signup')} target="_blank" rel="noopener noreferrer">
                         {plan.cta}
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Link>
@@ -339,26 +320,14 @@ export default function PricingPage() {
                   </Link>
                 </li>
                 <li>
-                  <a 
-                    className="hover:text-emerald-400 transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push('/?scroll=assessment');
-                    }}
-                  >
+                  <Link href="/?scroll=assessment" className="hover:text-emerald-400 transition-colors cursor-pointer">
                     Assessment
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a 
-                    className="hover:text-emerald-400 transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push('/?scroll=faq');
-                    }}
-                  >
+                  <Link href="/?scroll=faq" className="hover:text-emerald-400 transition-colors cursor-pointer">
                     FAQs
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

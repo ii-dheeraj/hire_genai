@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useAuth } from "@/contexts/auth-context"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
@@ -31,18 +30,11 @@ import {
 } from "lucide-react"
 import { RecruitmentQuestionnaire } from "@/components/recruitment-questionnaire"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { getAppUrl } from "@/lib/domain-config"
 
 export default function HomePage() {
-  const { user, loading } = useAuth()
-  const router = useRouter()
   const searchParams = useSearchParams()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
-  useEffect(() => {
-    if (!loading && user) {
-      router.push("/dashboard")
-    }
-  }, [user, loading, router])
 
   useEffect(() => {
     const scrollTo = searchParams?.get('scroll')
@@ -52,24 +44,11 @@ export default function HomePage() {
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' })
         }
-        // Remove the scroll parameter from URL after scrolling
         window.history.replaceState({}, '', '/')
       }, 300)
       return () => clearTimeout(timer)
     }
   }, [searchParams])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-500"></div>
-      </div>
-    )
-  }
-
-  if (user) {
-    return null
-  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -112,7 +91,7 @@ export default function HomePage() {
               </nav>
             </div>
             <div className="hidden md:flex items-center space-x-4">
-              <Link href="/login">
+              <Link href={getAppUrl('/login')} target="_blank" rel="noopener noreferrer">
                 <Button
                   variant="ghost"
                   className="text-gray-700 hover:text-emerald-600 font-medium"
@@ -120,7 +99,7 @@ export default function HomePage() {
                   Login
                 </Button>
               </Link>
-              <Link href="/signup">
+              <Link href={getAppUrl('/signup')} target="_blank" rel="noopener noreferrer">
                 <Button className="sr-button-primary">Get started</Button>
               </Link>
             </div>
@@ -129,7 +108,7 @@ export default function HomePage() {
             <div className="md:hidden flex items-center">
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-emerald-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-500 transition-colors"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-emerald-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-emerald-600 transition-colors"
               >
                 {mobileMenuOpen ? (
                   <X className="block h-6 w-6" aria-hidden="true" />
@@ -175,7 +154,7 @@ export default function HomePage() {
               </Link>
               <div className="pt-4 pb-3 border-t border-gray-100">
                 <div className="px-3 space-y-2">
-                  <Link href="/login" onClick={() => setMobileMenuOpen(false)}>
+                  <Link href={getAppUrl('/login')} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
                     <Button
                       variant="ghost"
                       className="w-full justify-start text-gray-700 hover:text-emerald-600 hover:bg-gray-50 font-medium transition-colors"
@@ -183,7 +162,7 @@ export default function HomePage() {
                       Login
                     </Button>
                   </Link>
-                  <Link href="/signup" onClick={() => setMobileMenuOpen(false)}>
+                  <Link href={getAppUrl('/signup')} target="_blank" rel="noopener noreferrer" onClick={() => setMobileMenuOpen(false)}>
                     <Button className="w-full sr-button-primary">Get started</Button>
                   </Link>
                 </div>
@@ -194,10 +173,10 @@ export default function HomePage() {
       </header>
 
       {/* Announcement Banner */}
-      <div className="bg-emerald-50 border-b border-emerald-100">
+      <div className="bg-emerald-50 border-b border-emerald-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex items-center justify-center">
-            <div className="flex items-center space-x-2 text-emerald-800">
+            <div className="flex items-center space-x-2 text-emerald-700">
               <Zap className="w-4 h-4" />
               <span className="text-sm font-medium">HireGenAI Launches All-New AI-Powered Recruitment Suite</span>
             </div>
@@ -244,7 +223,7 @@ export default function HomePage() {
                   playsInline
                 />
               </div>
-              <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-emerald-100 to-emerald-200 rounded-2xl -z-10"></div>
+              <div className="absolute -top-4 -right-4 w-full h-full bg-gradient-to-br from-emerald-50 to-emerald-100 rounded-2xl -z-10"></div>
             </div>
           </div>
         </div>
@@ -271,9 +250,9 @@ export default function HomePage() {
           {/* Features Grid - 2x2 Layout */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Intelligent CV Parsing */}
-            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-500/50 hover:shadow-xl hover:-translate-y-2">
+            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-600/50 hover:shadow-xl hover:-translate-y-2">
               <CardContent className="p-0">
-                <div className="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
+                <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
                   <Search className="w-8 h-8 text-emerald-600" />
                 </div>
                 <h3 className="text-xl font-bold text-slate-800 mb-4">Intelligent CV Parsing</h3>
@@ -284,7 +263,7 @@ export default function HomePage() {
             </Card>
 
             {/* AI-Powered Initial Interview */}
-            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-500/50 hover:shadow-xl hover:-translate-y-2">
+            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-600/50 hover:shadow-xl hover:-translate-y-2">
               <CardContent className="p-0">
                 <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
                   <Brain className="w-8 h-8 text-blue-600" />
@@ -297,7 +276,7 @@ export default function HomePage() {
             </Card>
 
             {/* Data-Driven Shortlisting */}
-            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-500/50 hover:shadow-xl hover:-translate-y-2">
+            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-600/50 hover:shadow-xl hover:-translate-y-2">
               <CardContent className="p-0">
                 <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
                   <Phone className="w-8 h-8 text-purple-600" />
@@ -310,7 +289,7 @@ export default function HomePage() {
             </Card>
 
             {/* Advanced Analytics */}
-            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-500/50 hover:shadow-xl hover:-translate-y-2">
+            <Card className="sr-card p-8 text-center transition-all duration-300 hover:shadow-emerald-600/50 hover:shadow-xl hover:-translate-y-2">
               <CardContent className="p-0">
                 <div className="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mb-6 mx-auto transition-transform duration-300 hover:rotate-12">
                   <BarChart3 className="w-8 h-8 text-red-600" />
@@ -695,7 +674,6 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-          
         </div>
       </section>
 
@@ -713,49 +691,49 @@ export default function HomePage() {
 
           <Card className="sr-card p-0">
             <CardContent className="p-0">
-              <Accordion type="single" collapsible className="w-full space-y-1">
-                <AccordionItem value="item-1" className="border-slate-200 rounded-lg overflow-hidden">
-                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center">
+              <Accordion type="single" collapsible className="w-full space-y-2">
+                <AccordionItem value="item-1" className="border border-slate-200 rounded-lg overflow-hidden">
+                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center border-none">
                     <span className="font-medium text-slate-800 text-base leading-relaxed">What is the HireGenAI, and how does it work?</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-5 text-slate-600 leading-relaxed text-base">
                     The HireGenAI is an advanced platform that uses artificial intelligence to streamline and enhance your hiring process. It automates tasks like candidate sourcing, screening, and initial assessments, helping you find the best talent faster.
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-2" className="border-slate-200 rounded-lg overflow-hidden">
-                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center">
+                <AccordionItem value="item-2" className="border border-slate-200 rounded-lg overflow-hidden">
+                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center border-none">
                     <span className="font-medium text-slate-800 text-base leading-relaxed">How does it accelerate my hiring process?</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-5 text-slate-600 leading-relaxed text-base">
                     By automating repetitive tasks, providing intelligent candidate matching, and enabling quicker shortlisting, the HireGenAI significantly reduces the time-to-hire. It allows your recruitment team to focus on engaging with top candidates.
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-3" className="border-slate-200 rounded-lg overflow-hidden">
-                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center">
+                <AccordionItem value="item-3" className="border border-slate-200 rounded-lg overflow-hidden">
+                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center border-none">
                     <span className="font-medium text-slate-800 text-base leading-relaxed">Will the HireGenAI replace my recruiter?</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-5 text-slate-600 leading-relaxed text-base">
                     Not at all! The HireGenAI is designed to augment and empower your human recruiters, not replace them. It handles the time-consuming, data-intensive parts of recruitment, freeing up your team to focus on strategic tasks and building relationships.
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-4" className="border-slate-200 rounded-lg overflow-hidden">
-                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center">
+                <AccordionItem value="item-4" className="border border-slate-200 rounded-lg overflow-hidden">
+                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center border-none">
                     <span className="font-medium text-slate-800 text-base leading-relaxed">What kind of roles can HireGenAI screen for?</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-5 text-slate-600 leading-relaxed text-base">
                     Our HireGenAI is versatile and can be configured to screen for a wide range of roles across various industries, from technical and engineering positions to sales, marketing, and customer service roles. It adapts to the specific skills and qualifications required for each position.
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-5" className="border-slate-200 rounded-lg overflow-hidden">
-                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center">
+                <AccordionItem value="item-5" className="border border-slate-200 rounded-lg overflow-hidden">
+                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center border-none">
                     <span className="font-medium text-slate-800 text-base leading-relaxed">Can HireGenAI integrate with our existing hiring processes?</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-5 text-slate-600 leading-relaxed text-base">
                     Yes, we understand the importance of seamless integration. Our HireGenAI offers flexible integration options with popular Applicant Tracking Systems (ATS) and other HR software to fit smoothly into your current workflows.
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-6" className="border-slate-200 rounded-lg overflow-hidden">
-                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center">
+                <AccordionItem value="item-6" className="border border-slate-200 rounded-lg overflow-hidden">
+                  <AccordionTrigger className="text-left px-6 py-5 hover:no-underline min-h-[72px] flex items-center border-none">
                     <span className="font-medium text-slate-800 text-base leading-relaxed">How do I get started?</span>
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-5 text-slate-600 leading-relaxed text-base">
@@ -777,18 +755,22 @@ export default function HomePage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
-              onClick={() => router.push('/pricing')}
               className="bg-white text-emerald-600 hover:bg-gray-100 font-semibold px-8 py-4 text-lg rounded-full"
+              asChild
             >
-              View pricing
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <Link href="/pricing">
+                View pricing
+                <ArrowRight className="w-5 h-5 ml-2" />
+              </Link>
             </Button>
             <Button
               variant="outline"
               className="border-white text-white hover:bg-white hover:text-emerald-600 font-semibold px-8 py-4 text-lg rounded-full bg-transparent"
-              onClick={() => router.push('/demo-en')}
+              asChild
             >
-              Try demo
+              <Link href="/demo-en">
+                Try demo
+              </Link>
             </Button>
           </div>
         </div>
@@ -888,9 +870,9 @@ export default function HomePage() {
                   </Link>
                 </li>
                 <li>
-                  <a href="/owner-login" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition-colors">
+                  <Link href="/owner-login" className="hover:text-emerald-400 transition-colors">
                     Admin
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -940,7 +922,7 @@ export default function HomePage() {
 
           {/* Footer Bottom */}
           <div className="border-t border-slate-800 pt-8 text-center text-slate-400 text-sm">
-            <p>&copy; 2024 HireGenAI. All rights reserved.</p>
+            <p>&copy; 2025 HireGenAI. All rights reserved.</p>
           </div>
         </div>
       </footer>

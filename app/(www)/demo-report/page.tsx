@@ -1,14 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { Check, ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { getAppUrl } from "@/lib/domain-config"
 import Link from "next/link"
 
 export default function DemoReport() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const [score, setScore] = useState(0)
   const [contactInfo, setContactInfo] = useState({ name: "", email: "", company: "" })
@@ -82,14 +82,15 @@ export default function DemoReport() {
               </nav>
             </div>
             <div className="flex items-center space-x-4">
-              <Button
-                variant="ghost"
-                onClick={() => router.push('/login')}
-                className="text-gray-700 hover:text-emerald-600 font-medium"
-              >
-                Login
-              </Button>
-              <Link href="/signup">
+              <Link href={getAppUrl('/login')} target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="ghost"
+                  className="text-gray-700 hover:text-emerald-600 font-medium"
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link href={getAppUrl('/signup')} target="_blank" rel="noopener noreferrer">
                 <Button className="sr-button-primary">Get started</Button>
               </Link>
             </div>
@@ -136,7 +137,7 @@ export default function DemoReport() {
               <Card className="bg-gradient-to-r from-emerald-600 to-purple-600 text-white p-6 sm:p-8 text-center">
                 <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Recruitment?</h3>
                 <p className="mb-6">Start your 14-day free trial and experience the power of AI-driven recruitment</p>
-                <Link href="/signup?section=company">
+                <Link href={getAppUrl('/signup?section=company')} target="_blank" rel="noopener noreferrer">
                   <Button className="bg-white text-emerald-600 hover:bg-gray-100 font-bold px-8 py-6 text-lg rounded-full">
                     Start My 14-Day Free Trial
                   </Button>
@@ -149,7 +150,7 @@ export default function DemoReport() {
           <div className="mt-8 text-center">
             <Button
               variant="outline"
-              onClick={() => router.back()}
+              onClick={() => window.history.back()}
               className="flex items-center gap-2 mx-auto"
             >
               <ArrowLeft className="w-4 h-4" />

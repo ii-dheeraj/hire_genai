@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -12,7 +12,6 @@ import { ArrowRight, Mail, MessageSquare, Zap, Facebook, Instagram, Youtube, Lin
 import Navbar from "@/components/layout/Navbar"
 
 export default function ContactPage() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const [formData, setFormData] = useState({
     fullName: '',
@@ -299,8 +298,8 @@ export default function ContactPage() {
               <ul className="space-y-3 text-slate-400 text-sm">
                 <li><Link href="/demo-en" className="hover:text-emerald-400 transition-colors">Try the Demo</Link></li>
                 <li><Link href="/pricing" className="hover:text-emerald-400 transition-colors">Pricing</Link></li>
-                <li><a className="hover:text-emerald-400 transition-colors cursor-pointer" onClick={() => router.push('/?scroll=assessment')}>Assessment</a></li>
-                <li><a className="hover:text-emerald-400 transition-colors cursor-pointer" onClick={() => router.push('/?scroll=faq')}>FAQs</a></li>
+                <li><Link href="/?scroll=assessment" className="hover:text-emerald-400 transition-colors cursor-pointer">Assessment</Link></li>
+                <li><Link href="/?scroll=faq" className="hover:text-emerald-400 transition-colors cursor-pointer">FAQs</Link></li>
               </ul>
             </div>
 

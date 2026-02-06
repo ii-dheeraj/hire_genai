@@ -33,18 +33,18 @@ const navigationItems = [
     title: 'MAIN',
     items: [
       { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-      { name: 'Applications', href: '/dashboard/candidates', icon: Users, badge: 12 },
-      { name: 'Job Postings', href: '/dashboard/jobs', icon: Briefcase },
-      { name: 'Talent Pool', href: '/dashboard/talent-pool', icon: Users, badge: 12 },
+      { name: 'Applications', href: '/candidate', icon: Users, badge: 12 },
+      { name: 'Job Postings', href: '/jobs', icon: Briefcase },
+      { name: 'Talent Pool', href: '/talent-pool', icon: Users, badge: 12 },
     ],
   },
   {
     title: 'MANAGEMENT',
     items: [
-      { name: 'Messages', href: '/dashboard/messages', icon: MessageSquare },
-      { name: 'Delegation', href: '/dashboard/delegation', icon: UserCog },
-      { name: 'Support', href: '/dashboard/support', icon: HeadphonesIcon },
-      { name: 'Settings', href: '/dashboard/settings', icon: Settings },
+      { name: 'Messages', href: '/messages', icon: MessageSquare },
+      { name: 'Delegation', href: '/delegation', icon: UserCog },
+      { name: 'Support', href: '/support', icon: HeadphonesIcon },
+      { name: 'Settings', href: '/settings', icon: Settings },
     ],
   },
 ]

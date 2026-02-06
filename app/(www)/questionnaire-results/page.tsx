@@ -1,14 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { Check, ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { getAppUrl } from "@/lib/domain-config"
 import Link from "next/link"
 
 export default function QuestionnaireResults() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const [score, setScore] = useState(0)
   const [contactInfo, setContactInfo] = useState({ name: "", email: "", company: "" })
@@ -108,8 +108,7 @@ export default function QuestionnaireResults() {
   const recommendations = getRecommendations()
 
   const handleGetFullReport = () => {
-    // Navigate to demo-report page
-    router.push('/demo-report')
+    window.location.href = '/demo-report'
   }
 
   return (
@@ -159,14 +158,15 @@ export default function QuestionnaireResults() {
               </nav>
             </div>
             <div className="flex items-center space-x-4">
-              <Button
-                variant="ghost"
-                onClick={() => router.push('/login')}
-                className="text-gray-700 hover:text-emerald-600 font-medium"
-              >
-                Login
-              </Button>
-              <Link href="/signup">
+              <Link href={getAppUrl('/login')} target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="ghost"
+                  className="text-gray-700 hover:text-emerald-600 font-medium"
+                >
+                  Login
+                </Button>
+              </Link>
+              <Link href={getAppUrl('/signup')} target="_blank" rel="noopener noreferrer">
                 <Button className="sr-button-primary">Get started</Button>
               </Link>
             </div>
@@ -223,7 +223,7 @@ export default function QuestionnaireResults() {
           <div className="mt-8">
             <Button
               variant="outline"
-              onClick={() => router.back()}
+              onClick={() => window.history.back()}
               className="flex items-center gap-2"
             >
               <ArrowLeft className="w-4 h-4" />

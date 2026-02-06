@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useAuth } from "@/contexts/auth-context"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import {
@@ -19,10 +18,9 @@ import {
   Target,
 } from "lucide-react"
 import Navbar from "@/components/layout/Navbar"
+import { getAppUrl } from "@/lib/domain-config"
 
 export default function AboutPage() {
-  const { user, loading } = useAuth()
-  const router = useRouter()
   const searchParams = useSearchParams()
 
   useEffect(() => {
@@ -38,14 +36,6 @@ export default function AboutPage() {
       return () => clearTimeout(timer)
     }
   }, [searchParams])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-500"></div>
-      </div>
-    )
-  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -145,11 +135,11 @@ export default function AboutPage() {
                     Book a Meeting
                   </Button>
                 </Link>
-                <Link href="/login">
+                <Link href={getAppUrl('/login')} target="_blank" rel="noopener noreferrer">
                   <Button 
                     className="bg-white text-emerald-600 hover:bg-emerald-50 font-semibold px-7 py-2.5 h-auto rounded-lg transition-all duration-200 hover:shadow-lg"
                   >
-                    Demo Sign In
+                    Login
                   </Button>
                 </Link>
                 <Button 
@@ -313,26 +303,14 @@ export default function AboutPage() {
                   </Link>
                 </li>
                 <li>
-                  <a 
-                    className="hover:text-emerald-400 transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push('/?scroll=assessment');
-                    }}
-                  >
+                  <Link href="/?scroll=assessment" className="hover:text-emerald-400 transition-colors cursor-pointer">
                     Assessment
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a 
-                    className="hover:text-emerald-400 transition-colors cursor-pointer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      router.push('/?scroll=faq');
-                    }}
-                  >
+                  <Link href="/?scroll=faq" className="hover:text-emerald-400 transition-colors cursor-pointer">
                     FAQs
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

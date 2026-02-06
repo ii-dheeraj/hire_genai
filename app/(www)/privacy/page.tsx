@@ -1,7 +1,5 @@
 "use client"
 
-import { useRouter } from "next/navigation"
-import { useAuth } from "@/contexts/auth-context"
 import Navbar from "@/components/layout/Navbar"
 import Link from "next/link"
 import {
@@ -14,17 +12,6 @@ import {
 } from "lucide-react"
 
 export default function PrivacyPolicyPage() {
-  const { user, loading } = useAuth()
-  const router = useRouter()
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-emerald-500"></div>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
@@ -191,8 +178,8 @@ export default function PrivacyPolicyPage() {
               <ul className="space-y-3 text-slate-400 text-sm">
                 <li><Link href="/demo-en" className="hover:text-emerald-400 transition-colors">Try the Demo</Link></li>
                 <li><Link href="/pricing" className="hover:text-emerald-400 transition-colors">Pricing</Link></li>
-                <li><a className="hover:text-emerald-400 transition-colors cursor-pointer" onClick={() => router.push('/?scroll=assessment')}>Assessment</a></li>
-                <li><a className="hover:text-emerald-400 transition-colors cursor-pointer" onClick={() => router.push('/?scroll=faq')}>FAQs</a></li>
+                <li><Link href="/?scroll=assessment" className="hover:text-emerald-400 transition-colors cursor-pointer">Assessment</Link></li>
+                <li><Link href="/?scroll=faq" className="hover:text-emerald-400 transition-colors cursor-pointer">FAQs</Link></li>
               </ul>
             </div>
 
